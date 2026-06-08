@@ -18,4 +18,4 @@ jobs:
         env:
           FIREBASE_DB_URL: ${{ secrets.FIREBASE_DB_URL }}
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          FDORG_KEY: c6e8143445109c722914eea716ed
+          FDORG_KEY: 4100c6e8143445109c722914eea716ed
