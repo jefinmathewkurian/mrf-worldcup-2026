@@ -44,13 +44,14 @@ async function main() {
   let fdMatches;
   try {
     const res = await axios.get(
-      "https://api.football-data.org/v4/competitions/WC/matches?season=2026",
+      "https://api.football-data.org/v4/competitions/WC/matches",
       { headers: { "X-Auth-Token": FDORG_KEY }, timeout: 15000 }
     );
     fdMatches = res.data.matches;
     console.log(`Fetched ${fdMatches.length} matches`);
-  } catch (err) {
+ } catch (err) {
     console.error("API fetch failed:", err.message);
+    if (err.response) console.error("Response:", JSON.stringify(err.response.data));
     process.exit(1);
   }
 
