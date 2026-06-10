@@ -309,7 +309,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <!-- CONFIRM MODAL -->
 <div class="modal-backdrop" id="confirmModal">
   <div class="modal">
-    <div class="modal-icon">⚽</div>
+    <div class="modal-flags" id="modalFlags" style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;font-size:13px;color:var(--text2)"></div>
     <div class="modal-title">LOCK IN PICK?</div>
     <div class="modal-match" id="modalMatchLabel">—</div>
     <div class="modal-pick" id="modalPickLabel">—</div>
@@ -519,87 +519,87 @@ function flagImg(teamName, emoji) {
 // ══════════════════════════════════════════
 const MATCHES = [
   // GROUP A
-  {id:1,  r:'A', t1:'Mexico',       f1:'🇲🇽', t2:'South Africa',  f2:'🇿🇦', date:'Jun 11', time:'15:00 ET', status:'open',     score:null,  correctPick:null, popularity:{w1:62,draw:18,w2:20}},
-  {id:2,  r:'A', t1:'Korea Rep.',   f1:'🇰🇷', t2:'Czechia',       f2:'🇨🇿', date:'Jun 11', time:'22:00 ET', status:'open',     score:null,  correctPick:null, popularity:{w1:48,draw:22,w2:30}},
-  {id:27, r:'A', t1:'Mexico',       f1:'🇲🇽', t2:'Korea Rep.',    f2:'🇰🇷', date:'Jun 18', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:55,draw:24,w2:21}},
-  {id:25, r:'A', t1:'Czechia',      f1:'🇨🇿', t2:'South Africa',  f2:'🇿🇦', date:'Jun 18', time:'12:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:58,draw:22,w2:20}},
-  {id:51, r:'A', t1:'South Africa', f1:'🇿🇦', t2:'Korea Rep.',    f2:'🇰🇷', date:'Jun 25', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:35,draw:25,w2:40}},
-  {id:53, r:'A', t1:'Czechia',      f1:'🇨🇿', t2:'Mexico',        f2:'🇲🇽', date:'Jun 25', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:30,draw:22,w2:48}},
+  {id:1,  r:'A', t1:'Mexico',       f1:'🇲🇽', t2:'South Africa',  f2:'🇿🇦', date:'Jun 11', time:'15:00 ET', status:'open',     score:null,  correctPick:null},
+  {id:2,  r:'A', t1:'Korea Rep.',   f1:'🇰🇷', t2:'Czechia',       f2:'🇨🇿', date:'Jun 11', time:'22:00 ET', status:'open',     score:null,  correctPick:null},
+  {id:27, r:'A', t1:'Mexico',       f1:'🇲🇽', t2:'Korea Rep.',    f2:'🇰🇷', date:'Jun 18', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:25, r:'A', t1:'Czechia',      f1:'🇨🇿', t2:'South Africa',  f2:'🇿🇦', date:'Jun 18', time:'12:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:51, r:'A', t1:'South Africa', f1:'🇿🇦', t2:'Korea Rep.',    f2:'🇰🇷', date:'Jun 25', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:53, r:'A', t1:'Czechia',      f1:'🇨🇿', t2:'Mexico',        f2:'🇲🇽', date:'Jun 25', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP B
-  {id:3,  r:'B', t1:'Canada',       f1:'🇨🇦', t2:'Bosnia & Herz.',f2:'🇧🇦', date:'Jun 12', time:'15:00 ET', status:'open',     score:null,  correctPick:null, popularity:{w1:55,draw:22,w2:23}},
-  {id:5,  r:'B', t1:'Qatar',        f1:'🇶🇦', t2:'Switzerland',   f2:'🇨🇭', date:'Jun 12', time:'21:00 ET', status:'open',     score:null,  correctPick:null, popularity:{w1:30,draw:20,w2:50}},
-  {id:100,r:'B', t1:'Canada',       f1:'🇨🇦', t2:'Qatar',         f2:'🇶🇦', date:'Jun 19', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:62,draw:20,w2:18}},
-  {id:101,r:'B', t1:'Bosnia & Herz.',f1:'🇧🇦',t2:'Switzerland',   f2:'🇨🇭', date:'Jun 19', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:30,draw:25,w2:45}},
-  {id:44, r:'B', t1:'Switzerland',  f1:'🇨🇭', t2:'Canada',        f2:'🇨🇦', date:'Jun 26', time:'23:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:42,draw:26,w2:32}},
-  {id:52, r:'B', t1:'Bosnia & Herz.',f1:'🇧🇦',t2:'Qatar',         f2:'🇶🇦', date:'Jun 26', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:55,draw:25,w2:20}},
+  {id:3,  r:'B', t1:'Canada',       f1:'🇨🇦', t2:'Bosnia & Herz.',f2:'🇧🇦', date:'Jun 12', time:'15:00 ET', status:'open',     score:null,  correctPick:null},
+  {id:5,  r:'B', t1:'Qatar',        f1:'🇶🇦', t2:'Switzerland',   f2:'🇨🇭', date:'Jun 12', time:'21:00 ET', status:'open',     score:null,  correctPick:null},
+  {id:100,r:'B', t1:'Canada',       f1:'🇨🇦', t2:'Qatar',         f2:'🇶🇦', date:'Jun 19', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:101,r:'B', t1:'Bosnia & Herz.',f1:'🇧🇦',t2:'Switzerland',   f2:'🇨🇭', date:'Jun 19', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:44, r:'B', t1:'Switzerland',  f1:'🇨🇭', t2:'Canada',        f2:'🇨🇦', date:'Jun 26', time:'23:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:52, r:'B', t1:'Bosnia & Herz.',f1:'🇧🇦',t2:'Qatar',         f2:'🇶🇦', date:'Jun 26', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP C
-  {id:102,r:'C', t1:'Brazil',       f1:'🇧🇷', t2:'Morocco',       f2:'🇲🇦', date:'Jun 13', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:58,draw:22,w2:20}},
-  {id:7,  r:'C', t1:'Haiti',        f1:'🇭🇹', t2:'Scotland',      f2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', date:'Jun 13', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:28,draw:24,w2:48}},
-  {id:28, r:'C', t1:'Brazil',       f1:'🇧🇷', t2:'Haiti',         f2:'🇭🇹', date:'Jun 20', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:85,draw:10,w2:5}},
-  {id:29, r:'C', t1:'Scotland',     f1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', t2:'Morocco',     f2:'🇲🇦', date:'Jun 20', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:40,draw:28,w2:32}},
-  {id:47, r:'C', t1:'Morocco',      f1:'🇲🇦', t2:'Haiti',         f2:'🇭🇹', date:'Jun 27', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:78,draw:14,w2:8}},
-  {id:50, r:'C', t1:'Scotland',     f1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', t2:'Brazil',      f2:'🇧🇷', date:'Jun 27', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:18,draw:20,w2:62}},
+  {id:102,r:'C', t1:'Brazil',       f1:'🇧🇷', t2:'Morocco',       f2:'🇲🇦', date:'Jun 13', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:7,  r:'C', t1:'Haiti',        f1:'🇭🇹', t2:'Scotland',      f2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', date:'Jun 13', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:28, r:'C', t1:'Brazil',       f1:'🇧🇷', t2:'Haiti',         f2:'🇭🇹', date:'Jun 20', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:29, r:'C', t1:'Scotland',     f1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', t2:'Morocco',     f2:'🇲🇦', date:'Jun 20', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:47, r:'C', t1:'Morocco',      f1:'🇲🇦', t2:'Haiti',         f2:'🇭🇹', date:'Jun 27', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:50, r:'C', t1:'Scotland',     f1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', t2:'Brazil',      f2:'🇧🇷', date:'Jun 27', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP D
-  {id:6,  r:'D', t1:'Australia',    f1:'🇦🇺', t2:'Türkiye',       f2:'🇹🇷', date:'Jun 12', time:'00:00 ET', status:'open',     score:null,  correctPick:null, popularity:{w1:42,draw:24,w2:34}},
-  {id:103,r:'D', t1:'USA',          f1:'🇺🇸', t2:'Paraguay',      f2:'🇵🇾', date:'Jun 12', time:'21:00 ET', status:'open',     score:null,  correctPick:null, popularity:{w1:58,draw:22,w2:20}},
-  {id:30, r:'D', t1:'USA',          f1:'🇺🇸', t2:'Australia',     f2:'🇦🇺', date:'Jun 19', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:52,draw:24,w2:24}},
-  {id:104,r:'D', t1:'Türkiye',      f1:'🇹🇷', t2:'USA',           f2:'🇺🇸', date:'Jun 26', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:36,draw:24,w2:40}},
-  {id:31, r:'D', t1:'Paraguay',     f1:'🇵🇾', t2:'Australia',     f2:'🇦🇺', date:'Jun 26', time:'23:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:40,draw:28,w2:32}},
+  {id:6,  r:'D', t1:'Australia',    f1:'🇦🇺', t2:'Türkiye',       f2:'🇹🇷', date:'Jun 12', time:'00:00 ET', status:'open',     score:null,  correctPick:null},
+  {id:103,r:'D', t1:'USA',          f1:'🇺🇸', t2:'Paraguay',      f2:'🇵🇾', date:'Jun 12', time:'21:00 ET', status:'open',     score:null,  correctPick:null},
+  {id:30, r:'D', t1:'USA',          f1:'🇺🇸', t2:'Australia',     f2:'🇦🇺', date:'Jun 19', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:104,r:'D', t1:'Türkiye',      f1:'🇹🇷', t2:'USA',           f2:'🇺🇸', date:'Jun 26', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:31, r:'D', t1:'Paraguay',     f1:'🇵🇾', t2:'Australia',     f2:'🇦🇺', date:'Jun 26', time:'23:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP E
-  {id:8,  r:'E', t1:'Germany',      f1:'🇩🇪', t2:'Curaçao',       f2:'🇨🇼', date:'Jun 13', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:88,draw:8,w2:4}},
-  {id:11, r:'E', t1:'Côte d\'Ivoire',f1:'🇨🇮',t2:'Ecuador',       f2:'🇪🇨', date:'Jun 13', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:44,draw:24,w2:32}},
-  {id:34, r:'E', t1:'Germany',      f1:'🇩🇪', t2:'Côte d\'Ivoire',f2:'🇨🇮', date:'Jun 20', time:'20:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:55,draw:25,w2:20}},
-  {id:36, r:'E', t1:'Ecuador',      f1:'🇪🇨', t2:'Curaçao',       f2:'🇨🇼', date:'Jun 20', time:'00:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:72,draw:16,w2:12}},
-  {id:49, r:'E', t1:'Ecuador',      f1:'🇪🇨', t2:'Germany',       f2:'🇩🇪', date:'Jun 27', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:22,draw:20,w2:58}},
-  {id:56, r:'E', t1:'Curaçao',      f1:'🇨🇼', t2:'Côte d\'Ivoire',f2:'🇨🇮', date:'Jun 27', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:25,draw:22,w2:53}},
+  {id:8,  r:'E', t1:'Germany',      f1:'🇩🇪', t2:'Curaçao',       f2:'🇨🇼', date:'Jun 13', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:11, r:'E', t1:'Côte d\'Ivoire',f1:'🇨🇮',t2:'Ecuador',       f2:'🇪🇨', date:'Jun 13', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:34, r:'E', t1:'Germany',      f1:'🇩🇪', t2:'Côte d\'Ivoire',f2:'🇨🇮', date:'Jun 20', time:'20:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:36, r:'E', t1:'Ecuador',      f1:'🇪🇨', t2:'Curaçao',       f2:'🇨🇼', date:'Jun 20', time:'00:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:49, r:'E', t1:'Ecuador',      f1:'🇪🇨', t2:'Germany',       f2:'🇩🇪', date:'Jun 27', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:56, r:'E', t1:'Curaçao',      f1:'🇨🇼', t2:'Côte d\'Ivoire',f2:'🇨🇮', date:'Jun 27', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP F
-  {id:10, r:'F', t1:'Netherlands',  f1:'🇳🇱', t2:'Japan',         f2:'🇯🇵', date:'Jun 14', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:52,draw:22,w2:26}},
-  {id:12, r:'F', t1:'Sweden',       f1:'🇸🇪', t2:'Tunisia',       f2:'🇹🇳', date:'Jun 14', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:55,draw:26,w2:19}},
-  {id:32, r:'F', t1:'Tunisia',      f1:'🇹🇳', t2:'Japan',         f2:'🇯🇵', date:'Jun 21', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:38,draw:26,w2:36}},
-  {id:35, r:'F', t1:'Netherlands',  f1:'🇳🇱', t2:'Sweden',        f2:'🇸🇪', date:'Jun 21', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:55,draw:24,w2:21}},
-  {id:55, r:'F', t1:'Tunisia',      f1:'🇹🇳', t2:'Netherlands',   f2:'🇳🇱', date:'Jun 27', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:22,draw:18,w2:60}},
-  {id:57, r:'F', t1:'Japan',        f1:'🇯🇵', t2:'Sweden',        f2:'🇸🇪', date:'Jun 27', time:'19:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:44,draw:24,w2:32}},
+  {id:10, r:'F', t1:'Netherlands',  f1:'🇳🇱', t2:'Japan',         f2:'🇯🇵', date:'Jun 14', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:12, r:'F', t1:'Sweden',       f1:'🇸🇪', t2:'Tunisia',       f2:'🇹🇳', date:'Jun 14', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:32, r:'F', t1:'Tunisia',      f1:'🇹🇳', t2:'Japan',         f2:'🇯🇵', date:'Jun 21', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:35, r:'F', t1:'Netherlands',  f1:'🇳🇱', t2:'Sweden',        f2:'🇸🇪', date:'Jun 21', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:55, r:'F', t1:'Tunisia',      f1:'🇹🇳', t2:'Netherlands',   f2:'🇳🇱', date:'Jun 27', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:57, r:'F', t1:'Japan',        f1:'🇯🇵', t2:'Sweden',        f2:'🇸🇪', date:'Jun 27', time:'19:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP G
-  {id:15, r:'G', t1:'IR Iran',      f1:'🇮🇷', t2:'New Zealand',   f2:'🇳🇿', date:'Jun 15', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:52,draw:22,w2:26}},
-  {id:16, r:'G', t1:'Belgium',      f1:'🇧🇪', t2:'Egypt',         f2:'🇪🇬', date:'Jun 15', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:62,draw:22,w2:16}},
-  {id:39, r:'G', t1:'New Zealand',  f1:'🇳🇿', t2:'Egypt',         f2:'🇪🇬', date:'Jun 22', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:42,draw:28,w2:30}},
-  {id:43, r:'G', t1:'Belgium',      f1:'🇧🇪', t2:'IR Iran',       f2:'🇮🇷', date:'Jun 22', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:60,draw:22,w2:18}},
-  {id:60, r:'G', t1:'New Zealand',  f1:'🇳🇿', t2:'Belgium',       f2:'🇧🇪', date:'Jun 28', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:22,draw:20,w2:58}},
-  {id:70, r:'G', t1:'Egypt',        f1:'🇪🇬', t2:'IR Iran',       f2:'🇮🇷', date:'Jun 28', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:45,draw:28,w2:27}},
+  {id:15, r:'G', t1:'IR Iran',      f1:'🇮🇷', t2:'New Zealand',   f2:'🇳🇿', date:'Jun 15', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:16, r:'G', t1:'Belgium',      f1:'🇧🇪', t2:'Egypt',         f2:'🇪🇬', date:'Jun 15', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:39, r:'G', t1:'New Zealand',  f1:'🇳🇿', t2:'Egypt',         f2:'🇪🇬', date:'Jun 22', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:43, r:'G', t1:'Belgium',      f1:'🇧🇪', t2:'IR Iran',       f2:'🇮🇷', date:'Jun 22', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:60, r:'G', t1:'New Zealand',  f1:'🇳🇿', t2:'Belgium',       f2:'🇧🇪', date:'Jun 28', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:70, r:'G', t1:'Egypt',        f1:'🇪🇬', t2:'IR Iran',       f2:'🇮🇷', date:'Jun 28', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP H
-  {id:13, r:'H', t1:'Spain',        f1:'🇪🇸', t2:'Cabo Verde',    f2:'🇨🇻', date:'Jun 14', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:82,draw:12,w2:6}},
-  {id:9,  r:'H', t1:'Saudi Arabia', f1:'🇸🇦', t2:'Uruguay',       f2:'🇺🇾', date:'Jun 14', time:'19:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:38,draw:24,w2:38}},
-  {id:37, r:'H', t1:'Spain',        f1:'🇪🇸', t2:'Saudi Arabia',  f2:'🇸🇦', date:'Jun 21', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:70,draw:18,w2:12}},
-  {id:46, r:'H', t1:'Uruguay',      f1:'🇺🇾', t2:'Cabo Verde',    f2:'🇨🇻', date:'Jun 21', time:'19:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:72,draw:16,w2:12}},
-  {id:64, r:'H', t1:'Cabo Verde',   f1:'🇨🇻', t2:'Saudi Arabia',  f2:'🇸🇦', date:'Jun 28', time:'23:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:40,draw:26,w2:34}},
-  {id:65, r:'H', t1:'Uruguay',      f1:'🇺🇾', t2:'Spain',         f2:'🇪🇸', date:'Jun 28', time:'20:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:28,draw:24,w2:48}},
+  {id:13, r:'H', t1:'Spain',        f1:'🇪🇸', t2:'Cabo Verde',    f2:'🇨🇻', date:'Jun 14', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:9,  r:'H', t1:'Saudi Arabia', f1:'🇸🇦', t2:'Uruguay',       f2:'🇺🇾', date:'Jun 14', time:'19:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:37, r:'H', t1:'Spain',        f1:'🇪🇸', t2:'Saudi Arabia',  f2:'🇸🇦', date:'Jun 21', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:46, r:'H', t1:'Uruguay',      f1:'🇺🇾', t2:'Cabo Verde',    f2:'🇨🇻', date:'Jun 21', time:'19:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:64, r:'H', t1:'Cabo Verde',   f1:'🇨🇻', t2:'Saudi Arabia',  f2:'🇸🇦', date:'Jun 28', time:'23:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:65, r:'H', t1:'Uruguay',      f1:'🇺🇾', t2:'Spain',         f2:'🇪🇸', date:'Jun 28', time:'20:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP I
-  {id:19, r:'I', t1:'France',       f1:'🇫🇷', t2:'Senegal',       f2:'🇸🇳', date:'Jun 16', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:60,draw:22,w2:18}},
-  {id:42, r:'I', t1:'Senegal',      f1:'🇸🇳', t2:'Iraq',          f2:'🇮🇶', date:'Jun 22', time:'17:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:55,draw:24,w2:21}},
-  {id:48, r:'I', t1:'France',       f1:'🇫🇷', t2:'Iraq',          f2:'🇮🇶', date:'Jun 22', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:80,draw:12,w2:8}},
-  {id:33, r:'I', t1:'Norway',       f1:'🇳🇴', t2:'Senegal',       f2:'🇸🇳', date:'Jun 21', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:48,draw:26,w2:26}},
-  {id:66, r:'I', t1:'Norway',       f1:'🇳🇴', t2:'France',        f2:'🇫🇷', date:'Jun 28', time:'20:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:28,draw:24,w2:48}},
-  {id:105,r:'I', t1:'Iraq',         f1:'🇮🇶', t2:'Norway',        f2:'🇳🇴', date:'Jun 16', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:30,draw:26,w2:44}},
+  {id:19, r:'I', t1:'France',       f1:'🇫🇷', t2:'Senegal',       f2:'🇸🇳', date:'Jun 16', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:42, r:'I', t1:'Senegal',      f1:'🇸🇳', t2:'Iraq',          f2:'🇮🇶', date:'Jun 22', time:'17:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:48, r:'I', t1:'France',       f1:'🇫🇷', t2:'Iraq',          f2:'🇮🇶', date:'Jun 22', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:33, r:'I', t1:'Norway',       f1:'🇳🇴', t2:'Senegal',       f2:'🇸🇳', date:'Jun 21', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:66, r:'I', t1:'Norway',       f1:'🇳🇴', t2:'France',        f2:'🇫🇷', date:'Jun 28', time:'20:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:105,r:'I', t1:'Iraq',         f1:'🇮🇶', t2:'Norway',        f2:'🇳🇴', date:'Jun 16', time:'18:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP J
-  {id:20, r:'J', t1:'Argentina',    f1:'🇦🇷', t2:'Algeria',       f2:'🇩🇿', date:'Jun 17', time:'00:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:72,draw:16,w2:12}},
-  {id:14, r:'J', t1:'Austria',      f1:'🇦🇹', t2:'Jordan',        f2:'🇯🇴', date:'Jun 15', time:'12:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:60,draw:22,w2:18}},
-  {id:38, r:'J', t1:'Argentina',    f1:'🇦🇷', t2:'Austria',       f2:'🇦🇹', date:'Jun 22', time:'12:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:65,draw:20,w2:15}},
-  {id:40, r:'J', t1:'Jordan',       f1:'🇯🇴', t2:'Algeria',       f2:'🇩🇿', date:'Jun 22', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:38,draw:26,w2:36}},
-  {id:69, r:'J', t1:'Jordan',       f1:'🇯🇴', t2:'Argentina',     f2:'🇦🇷', date:'Jun 29', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:14,draw:16,w2:70}},
-  {id:71, r:'J', t1:'Algeria',      f1:'🇩🇿', t2:'Austria',       f2:'🇦🇹', date:'Jun 29', time:'19:30 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:42,draw:26,w2:32}},
+  {id:20, r:'J', t1:'Argentina',    f1:'🇦🇷', t2:'Algeria',       f2:'🇩🇿', date:'Jun 17', time:'00:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:14, r:'J', t1:'Austria',      f1:'🇦🇹', t2:'Jordan',        f2:'🇯🇴', date:'Jun 15', time:'12:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:38, r:'J', t1:'Argentina',    f1:'🇦🇷', t2:'Austria',       f2:'🇦🇹', date:'Jun 22', time:'12:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:40, r:'J', t1:'Jordan',       f1:'🇯🇴', t2:'Algeria',       f2:'🇩🇿', date:'Jun 22', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:69, r:'J', t1:'Jordan',       f1:'🇯🇴', t2:'Argentina',     f2:'🇦🇷', date:'Jun 29', time:'22:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:71, r:'J', t1:'Algeria',      f1:'🇩🇿', t2:'Austria',       f2:'🇦🇹', date:'Jun 29', time:'19:30 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP K
-  {id:72, r:'K', t1:'Congo DR',     f1:'🇨🇩', t2:'Uzbekistan',    f2:'🇺🇿', date:'Jun 15', time:'19:30 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:50,draw:26,w2:24}},
-  {id:23, r:'K', t1:'Portugal',     f1:'🇵🇹', t2:'Congo DR',      f2:'🇨🇩', date:'Jun 17', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:72,draw:16,w2:12}},
-  {id:24, r:'K', t1:'Colombia',     f1:'🇨🇴', t2:'Congo DR',      f2:'🇨🇩', date:'Jun 17', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:62,draw:22,w2:16}},
-  {id:54, r:'K', t1:'Portugal',     f1:'🇵🇹', t2:'Uzbekistan',    f2:'🇺🇿', date:'Jun 26', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:75,draw:16,w2:9}},
-  {id:68, r:'K', t1:'Colombia',     f1:'🇨🇴', t2:'Portugal',      f2:'🇵🇹', date:'Jun 29', time:'17:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:30,draw:24,w2:46}},
+  {id:72, r:'K', t1:'Congo DR',     f1:'🇨🇩', t2:'Uzbekistan',    f2:'🇺🇿', date:'Jun 15', time:'19:30 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:23, r:'K', t1:'Portugal',     f1:'🇵🇹', t2:'Congo DR',      f2:'🇨🇩', date:'Jun 17', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:24, r:'K', t1:'Colombia',     f1:'🇨🇴', t2:'Congo DR',      f2:'🇨🇩', date:'Jun 17', time:'13:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:54, r:'K', t1:'Portugal',     f1:'🇵🇹', t2:'Uzbekistan',    f2:'🇺🇿', date:'Jun 26', time:'21:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:68, r:'K', t1:'Colombia',     f1:'🇨🇴', t2:'Portugal',      f2:'🇵🇹', date:'Jun 29', time:'17:00 ET', status:'upcoming', score:null,  correctPick:null},
   // GROUP L
-  {id:21, r:'L', t1:'England',      f1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', t2:'Croatia',     f2:'🇭🇷', date:'Jun 17', time:'19:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:62,draw:22,w2:16}},
-  {id:17, r:'L', t1:'Ghana',        f1:'🇬🇭', t2:'Panama',        f2:'🇵🇦', date:'Jun 16', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:52,draw:26,w2:22}},
-  {id:41, r:'L', t1:'England',      f1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', t2:'Ghana',       f2:'🇬🇭', date:'Jun 23', time:'20:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:66,draw:20,w2:14}},
-  {id:45, r:'L', t1:'Panama',       f1:'🇵🇦', t2:'Croatia',       f2:'🇭🇷', date:'Jun 23', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:28,draw:24,w2:48}},
-  {id:61, r:'L', t1:'Panama',       f1:'🇵🇦', t2:'England',       f2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', date:'Jun 29', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:16,draw:18,w2:66}},
-  {id:67, r:'L', t1:'Croatia',      f1:'🇭🇷', t2:'Ghana',         f2:'🇬🇭', date:'Jun 29', time:'17:00 ET', status:'upcoming', score:null,  correctPick:null, popularity:{w1:48,draw:28,w2:24}},
+  {id:21, r:'L', t1:'England',      f1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', t2:'Croatia',     f2:'🇭🇷', date:'Jun 17', time:'19:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:17, r:'L', t1:'Ghana',        f1:'🇬🇭', t2:'Panama',        f2:'🇵🇦', date:'Jun 16', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:41, r:'L', t1:'England',      f1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', t2:'Ghana',       f2:'🇬🇭', date:'Jun 23', time:'20:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:45, r:'L', t1:'Panama',       f1:'🇵🇦', t2:'Croatia',       f2:'🇭🇷', date:'Jun 23', time:'16:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:61, r:'L', t1:'Panama',       f1:'🇵🇦', t2:'England',       f2:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', date:'Jun 29', time:'15:00 ET', status:'upcoming', score:null,  correctPick:null},
+  {id:67, r:'L', t1:'Croatia',      f1:'🇭🇷', t2:'Ghana',         f2:'🇬🇭', date:'Jun 29', time:'17:00 ET', status:'upcoming', score:null,  correctPick:null},
 ];
 
 // Deduplicate by composite key t1+t2+date
@@ -613,30 +613,9 @@ const MATCHES_CLEAN = MATCHES.filter(m => {
 
 const GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L'];
 
-const FAKE_PLAYERS = [
-  {name:'Ramesh K.',   dept:'Process',  pts:310, acc:78, streak:5,  delta:2,  av:'#1A6B3C', initials:'RK'},
-  {name:'Priya S.',    dept:'R&D',      pts:295, acc:74, streak:3,  delta:0,  av:'#993556', initials:'PS'},
-  {name:'Arun M.',     dept:'QA',       pts:280, acc:71, streak:1,  delta:-1, av:'#854F0B', initials:'AM'},
-  {name:'Deepa R.',    dept:'Process',  pts:260, acc:68, streak:0,  delta:1,  av:'#534AB7', initials:'DR'},
-  {name:'Kiran T.',    dept:'Mfg.',     pts:245, acc:66, streak:2,  delta:-1, av:'#993C1D', initials:'KT'},
-  {name:'Suresh P.',   dept:'Supply',   pts:198, acc:63, streak:0,  delta:-2, av:'#1A6B3C', initials:'SP'},
-  {name:'Ananya V.',   dept:'HR',       pts:185, acc:61, streak:1,  delta:0,  av:'#185FA5', initials:'AV'},
-  {name:'Vijay N.',    dept:'Finance',  pts:172, acc:58, streak:0,  delta:3,  av:'#993556', initials:'VN'},
-  {name:'Meena B.',    dept:'Mfg.',     pts:160, acc:55, streak:0,  delta:-1, av:'#534AB7', initials:'MB'},
-  {name:'Sanjay L.',   dept:'R&D',      pts:148, acc:52, streak:0,  delta:0,  av:'#854F0B', initials:'SL'},
-  {name:'Ravi P.',     dept:'Process',  pts:140, acc:50, streak:1,  delta:2,  av:'#1A6B3C', initials:'RP'},
-  {name:'Lakshmi N.',  dept:'QA',       pts:135, acc:48, streak:0,  delta:-1, av:'#185FA5', initials:'LN'},
-];
+// No fake players — leaderboard uses only real Firebase data
 
-const DEPT_STANDINGS = [
-  {name:'Process', avg:236, max:310},
-  {name:'R&D',     avg:221, max:310},
-  {name:'QA',      avg:207, max:310},
-  {name:'Mfg.',    avg:202, max:310},
-  {name:'Supply',  avg:198, max:310},
-  {name:'HR',      avg:185, max:310},
-  {name:'Finance', avg:172, max:310},
-];
+// DEPT_STANDINGS computed live from Firebase players — see getDeptStandings()
 
 const BADGES_DEF = [
   {id:'top10',    icon:'🏆', name:'Top 10',      desc:'Reached top 10 overall'},
@@ -685,7 +664,7 @@ function pickDeadline(m){
 // ══════════════════════════════════════════
 // STATE — localStorage fallback + Firebase
 // ══════════════════════════════════════════
-let S = {loggedIn:false, name:'', dept:'', picks:{}, earnedBadges:['first','top10','streak3']};
+let S = {loggedIn:false, name:'', dept:'', picks:{}, earnedBadges:[]};
 let fbReady = false;
 
 function loadState(){
@@ -794,10 +773,18 @@ function openConfirmModal(matchId, pick){
   const lbl = pick==='w1'?m.t1 : pick==='w2'?m.t2 : 'Draw';
   const isChange = !!S.picks[m.id];
 
-  document.getElementById('modalMatchLabel').textContent = `${m.t1} vs ${m.t2} · Grp ${m.r} · ${m.date}`;
+  document.getElementById('modalMatchLabel').textContent = `Grp ${m.r} · ${m.date} · ${m.time}`;
   document.getElementById('modalPickLabel').textContent  = (isChange ? '✏️ Change to: ' : '⚽ Predict: ') + lbl;
   document.getElementById('modalDeadline').textContent   =
     `You can change this prediction up to 24h before kickoff.\nDeadline: ${pickDeadline(m)}`;
+
+  // Build flags row: flag img + team name | VS | flag img + team name
+  const f1Html = flagImg(m.t1, m.f1);
+  const f2Html = flagImg(m.t2, m.f2);
+  document.getElementById('modalFlags').innerHTML =
+    `<span style="display:flex;align-items:center;gap:6px">${f1Html}<strong>${m.t1}</strong></span>
+     <span style="color:var(--text3);font-size:11px;font-family:var(--font-mono)">VS</span>
+     <span style="display:flex;align-items:center;gap:6px"><strong>${m.t2}</strong>${f2Html}</span>`;
 
   _pendingPick = {matchId, pick};
   document.getElementById('confirmModal').classList.add('open');
@@ -843,7 +830,7 @@ function getMyAcc(){
 }
 function getMyRank(players){
   const pts=getMyPts(); let rank=1;
-  (players||FAKE_PLAYERS).forEach(p=>{if((p.pts||0)>pts)rank++;});
+  (players||[]).forEach(p=>{if((p.pts||0)>pts)rank++;});
   return rank;
 }
 
@@ -852,25 +839,65 @@ function getFullLeaderboard(){
   const me={
     name:S.name||'You', dept:S.dept||'MRF', pts,
     acc:total?Math.round(correct/total*100):0,
-    streak:getMyStreak(), delta:1,
+    streak:getMyStreak(), delta:0,
     av:'#CC0000',
     initials:(S.name||'ME').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(),
     isMe:true
   };
-
-  // Merge real Firebase players + fake ones, deduplicated by name
-  const fbPlayers = (window._fbPlayers||[]).filter(p=>p.name!==S.name).map(p=>({
+  // Only real Firebase players — no fake data
+  const fbPlayers = (window._fbPlayers||[]).filter(p=>p.name&&p.name!==S.name).map(p=>({
     name:p.name, dept:p.dept||'MRF',
     pts:p.pts||0, acc:p.acc||0, streak:p.streak||0, delta:0,
     av:'#444', initials:p.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(),
     isMe:false
   }));
+  return [...fbPlayers, me].sort((a,b)=>b.pts-a.pts);
+}
 
-  const fakeFiltered = FAKE_PLAYERS.filter(fp =>
-    !fbPlayers.find(r=>r.name.toLowerCase()===fp.name.toLowerCase())
-  );
+// Compute department standings from real Firebase players
+function getDeptStandings(){
+  const all = (window._fbPlayers||[]);
+  if(!all.length) return [];
+  const deptMap = {};
+  all.forEach(p=>{
+    const d = p.dept||'Other';
+    if(!deptMap[d]) deptMap[d]={name:d, total:0, count:0};
+    deptMap[d].total += (p.pts||0);
+    deptMap[d].count++;
+  });
+  const depts = Object.values(deptMap).map(d=>({
+    name:d.name, avg:Math.round(d.total/d.count), max:Math.max(...Object.values(deptMap).map(x=>Math.round(x.total/x.count)))
+  }));
+  return depts.sort((a,b)=>b.avg-a.avg);
+}
 
-  return [...fbPlayers, ...fakeFiltered, me].sort((a,b)=>b.pts-a.pts);
+// Compute popular picks from real Firebase players
+function getPopularPicks(){
+  const all = window._fbPlayers||[];
+  const counts = {}; // matchId -> {w1:0, draw:0, w2:0}
+  all.forEach(p=>{
+    if(!p.picks) return;
+    Object.entries(p.picks).forEach(([mid,pick])=>{
+      if(!counts[mid]) counts[mid]={w1:0,draw:0,w2:0,total:0};
+      if(counts[mid][pick]!==undefined){ counts[mid][pick]++; counts[mid].total++; }
+    });
+  });
+  return counts;
+}
+
+// Compute hardest matches from real pick spread (most even = hardest)
+function getHardestMatches(){
+  const pickCounts = getPopularPicks();
+  return MATCHES_CLEAN
+    .filter(m=>(m.status==='upcoming'||m.status==='open') && pickCounts[m.id] && pickCounts[m.id].total>=3)
+    .map(m=>{
+      const c = pickCounts[m.id];
+      const pcts = [c.w1,c.draw,c.w2].map(x=>Math.round(x/c.total*100));
+      const maxPct = Math.max(...pcts);
+      return {...m, maxPct};
+    })
+    .sort((a,b)=>a.maxPct-b.maxPct) // lowest majority = hardest
+    .slice(0,6);
 }
 
 // ══════════════════════════════════════════
@@ -922,13 +949,15 @@ function updateTopbar(){
 function renderHome(){
   const pts=getMyPts(); const {correct,total}=getMyStats(); const streak=getMyStreak();
   document.getElementById('hMyPts').textContent=pts;
+  const playerCount=(window._fbPlayers||[]).length+1; // +1 for current user
+  const hpl=document.getElementById('hPlayers'); if(hpl) hpl.textContent=playerCount;
   const lb=getFullLeaderboard();
   document.getElementById('hMyRank').textContent='#'+getMyRank(lb);
   document.getElementById('hAcc').textContent=getMyAcc();
   document.getElementById('hStreak').textContent=streak;
   document.getElementById('hCorrect').textContent=correct+'/'+total;
-  const openCount=MATCHES_CLEAN.filter(m=>m.status==='open').length;
-  document.getElementById('hOpen').textContent=openCount;
+  const openCount=MATCHES_CLEAN.filter(m=>m.status==='open'||m.status==='upcoming').filter(m=>!S.picks[m.id]).length;
+  document.getElementById('hOpen').textContent=openCount||'—';
 
   const t3=document.getElementById('homeTop3'); t3.innerHTML='';
   ['🥇','🥈','🥉'].forEach((medal,i)=>{
@@ -1137,6 +1166,7 @@ function _applyPick(matchId, pick){
   if(!m) return;
   const isChange = !!S.picks[m.id];
   S.picks[m.id] = pick;
+  checkAndAwardBadges();
   saveLocal();
   saveToFirebase();
   const lbl=pick==='w1'?m.t1:pick==='w2'?m.t2:'Draw';
@@ -1146,6 +1176,41 @@ function _applyPick(matchId, pick){
   if(active.id==='page-predict') renderMatchList();
   else if(active.id==='page-home') renderHome();
   else if(active.id==='page-mypicks') renderMyPicks();
+}
+
+// Award badges based on real user activity
+function checkAndAwardBadges(){
+  const newBadges = [];
+  const totalPicks = Object.keys(S.picks).length;
+  const {correct, total} = getMyStats();
+  const streak = getMyStreak();
+  const lb = getFullLeaderboard();
+  const myRank = lb.findIndex(p=>p.isMe) + 1;
+
+  if(totalPicks >= 1)   newBadges.push('first');
+  if(correct >= 10)     newBadges.push('perfect');
+  if(streak >= 3)       newBadges.push('streak3');
+  if(streak >= 5)       newBadges.push('streak5');
+  if(myRank > 0 && myRank <= 10) newBadges.push('top10');
+  if(myRank > 0 && myRank <= 3)  newBadges.push('champion');
+
+  // Check for upset: user correctly predicted a match where >65% picked the other side
+  const pickCounts = getPopularPicks();
+  MATCHES_CLEAN.filter(m=>m.status==='done'&&S.picks[m.id]===m.correctPick).forEach(m=>{
+    const c = pickCounts[m.id];
+    if(!c || c.total < 3) return;
+    const myPick = S.picks[m.id];
+    const myPct = Math.round((c[myPick]||0)/c.total*100);
+    if(myPct <= 35) newBadges.push('upset'); // minority pick that was correct
+  });
+
+  // Check allpicks: predicted every match in any group
+  GROUPS.forEach(g=>{
+    const gMatches = MATCHES_CLEAN.filter(m=>m.r===g);
+    if(gMatches.every(m=>S.picks[m.id])) newBadges.push('allpicks');
+  });
+
+  newBadges.forEach(b=>{ if(!S.earnedBadges.includes(b)) S.earnedBadges.push(b); });
 }
 
 // ══════════════════════════════════════════
@@ -1159,7 +1224,7 @@ function renderLeaderboard(){
   const lb=getFullLeaderboard();
   const list=document.getElementById('lbList'); list.innerHTML='';
   const lbl = document.getElementById('playerCountLabel');
-  if(lbl) lbl.textContent = lb.length + ' EMPLOYEES';
+  if(lbl) lbl.textContent = lb.length + (lb.length===1?' EMPLOYEE':' EMPLOYEES');
 
   lb.forEach((p,i)=>{
     const rank=i+1;
@@ -1176,26 +1241,41 @@ function renderLeaderboard(){
   });
 
   const pp=document.getElementById('popularPicks'); pp.innerHTML='';
-  MATCHES_CLEAN.filter(m=>m.status==='open'||m.status==='upcoming').slice(0,5).forEach(m=>{
-    const best=Object.entries(m.popularity).sort((a,b)=>b[1]-a[1])[0];
-    const lbl=best[0]==='w1'?m.t1:best[0]==='w2'?m.t2:'Draw';
-    const div=document.createElement('div'); div.className='pop-row';
-    div.innerHTML=`<span class="pop-flags">${m.f1}${m.f2}</span>
-      <div class="pop-info"><div class="pop-match">Grp ${m.r} · ${m.t1} vs ${m.t2}</div>
-      <div class="pop-pick">${lbl} favoured</div>
-      <div class="pop-bar-bg"><div class="pop-bar-fill" style="width:${best[1]}%"></div></div></div>
-      <span class="pop-pct">${best[1]}%</span>`;
-    pp.appendChild(div);
-  });
+  const pickCounts=getPopularPicks();
+  const openMatches=MATCHES_CLEAN.filter(m=>m.status==='open'||m.status==='upcoming');
+  const popMatches=openMatches.filter(m=>pickCounts[m.id]&&pickCounts[m.id].total>0).slice(0,5);
+  if(!popMatches.length){
+    pp.innerHTML='<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">No picks submitted yet — check back once employees start predicting.</div>';
+  } else {
+    popMatches.forEach(m=>{
+      const c=pickCounts[m.id];
+      const entries=[['w1',c.w1],['draw',c.draw],['w2',c.w2]].sort((a,b)=>b[1]-a[1]);
+      const best=entries[0];
+      const lbl=best[0]==='w1'?m.t1:best[0]==='w2'?m.t2:'Draw';
+      const pct=Math.round(best[1]/c.total*100);
+      const div=document.createElement('div'); div.className='pop-row';
+      div.innerHTML=`<span class="pop-flags">${m.f1}${m.f2}</span>
+        <div class="pop-info"><div class="pop-match">Grp ${m.r} · ${m.t1} vs ${m.t2}</div>
+        <div class="pop-pick">${lbl} favoured <span style="color:var(--text3);font-size:11px">(${c.total} picks)</span></div>
+        <div class="pop-bar-bg"><div class="pop-bar-fill" style="width:${pct}%"></div></div></div>
+        <span class="pop-pct">${pct}%</span>`;
+      pp.appendChild(div);
+    });
+  }
 
   const ds=document.getElementById('deptStandings'); ds.innerHTML='';
-  DEPT_STANDINGS.forEach((d,i)=>{
-    const div=document.createElement('div'); div.className='dept-row';
-    div.innerHTML=`<span class="dept-rank">${i+1}</span><span class="dept-name">${d.name}</span>
-      <div class="dept-bar-bg"><div class="dept-bar-fill" style="width:${Math.round(d.avg/d.max*100)}%"></div></div>
-      <span class="dept-pts">${d.avg}</span>`;
-    ds.appendChild(div);
-  });
+  const depts=getDeptStandings();
+  if(!depts.length){
+    ds.innerHTML='<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">Department standings will appear once employees join.</div>';
+  } else {
+    depts.forEach((d,i)=>{
+      const div=document.createElement('div'); div.className='dept-row';
+      div.innerHTML=`<span class="dept-rank">${i+1}</span><span class="dept-name">${d.name}</span>
+        <div class="dept-bar-bg"><div class="dept-bar-fill" style="width:${Math.round(d.avg/d.max*100)}%"></div></div>
+        <span class="dept-pts">${d.avg}</span>`;
+      ds.appendChild(div);
+    });
+  }
 }
 
 // ══════════════════════════════════════════
@@ -1265,31 +1345,33 @@ function renderStats(){
   if(!done.length){
     ma.innerHTML='<div style="font-size:13px;color:var(--text3);padding:1rem 0">Results will appear here once matches are played.</div>';
   } else {
+    const pickCounts2=getPopularPicks();
     done.forEach(m=>{
-      const best=Object.values(m.popularity).sort((a,b)=>b-a)[0];
+      const c=pickCounts2[m.id];
+      if(!c||c.total<1) return;
+      const pcts={w1:Math.round(c.w1/c.total*100),draw:Math.round(c.draw/c.total*100),w2:Math.round(c.w2/c.total*100)};
+      const correctPct = m.correctPick ? (pcts[m.correctPick]||0) : 0;
       const div=document.createElement('div'); div.className='prog-row';
       div.innerHTML=`<span class="prog-label">${m.t1} vs ${m.t2}</span>
-        <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${best}%;background:${best>70?'#1A6B3C':best>50?'#CC0000':'#854F0B'}"></div></div>
-        <span class="prog-val">${best}%</span>`;
+        <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${correctPct}%;background:${correctPct>70?'#1A6B3C':correctPct>50?'#CC0000':'#854F0B'}"></div></div>
+        <span class="prog-val">${correctPct}%</span>`;
       ma.appendChild(div);
     });
   }
 
   const hl=document.getElementById('hardestList'); hl.innerHTML='';
-  const upcoming=MATCHES_CLEAN.filter(m=>m.status==='upcoming'||m.status==='open');
-  const hardest=[...upcoming].sort((a,b)=>{
-    const ba=Math.max(...Object.values(a.popularity));
-    const bb=Math.max(...Object.values(b.popularity));
-    return ba-bb;
-  }).slice(0,6);
-  hardest.forEach(m=>{
-    const best=Math.max(...Object.values(m.popularity));
-    const div=document.createElement('div'); div.className='prog-row';
-    div.innerHTML=`<span class="prog-label">${m.t1} vs ${m.t2}</span>
-      <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${best}%;background:#854F0B"></div></div>
-      <span class="prog-val">${best}%</span>`;
-    hl.appendChild(div);
-  });
+  const hardest=getHardestMatches();
+  if(!hardest.length){
+    hl.innerHTML='<div style="font-size:13px;color:var(--text3);padding:0.5rem 0">Will show once enough picks are in (min. 3 per match).</div>';
+  } else {
+    hardest.forEach(m=>{
+      const div=document.createElement('div'); div.className='prog-row';
+      div.innerHTML=`<span class="prog-label">${m.t1} vs ${m.t2}</span>
+        <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${m.maxPct}%;background:#854F0B"></div></div>
+        <span class="prog-val">${m.maxPct}%</span>`;
+      hl.appendChild(div);
+    });
+  }
 
   const bg=document.getElementById('badgesGrid'); bg.innerHTML='';
   BADGES_DEF.forEach(b=>{
